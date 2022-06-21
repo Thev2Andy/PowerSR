@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	  <RootNamespace>PowerSR</RootNamespace>
+	  
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Authors>Thev2Andy</Authors>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Description>A C# string data storage library.</Description>
+    <PackageProjectUrl>https://github.com/Thev2Andy/PowerSR</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Thev2Andy/PowerSR</RepositoryUrl>
+    <PackageTags>serialization, data, library, cross-platform, string, storage, serializer, data-storage, lib, power, string-storage</PackageTags>
+    <PackageIcon>PowerSR Icon.png</PackageIcon>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+	
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>..\PowerSR\PowerSR\XML Docs\PowerSR XML.xml</DocumentationFile>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <None Include="Resources\Icon\PowerSR Icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
