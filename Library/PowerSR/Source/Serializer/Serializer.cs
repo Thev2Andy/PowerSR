@@ -71,7 +71,7 @@ namespace PowerSR
                 }
             }
 
-            return String.Empty;
+            return null;
         }
 
 
