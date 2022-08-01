@@ -106,7 +106,7 @@ namespace PowerSR
         /// <param name="AssignOperator">Used to parse the value of properties.</param>
         /// <param name="NewlineOperator">Marks a newline in the value of a property.</param>
         #endregion
-        public Serializer(string AssignOperator = " = ", string NewlineOperator = @"\n") {
+        public Serializer(string AssignOperator = " = ", string NewlineOperator = @"~NL~") {
             this.AssignOperator = AssignOperator;
             this.NewlineOperator = NewlineOperator;
         }
