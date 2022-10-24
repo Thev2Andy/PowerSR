@@ -7,7 +7,6 @@ namespace SRTester
     {
         static void Main(string[] args)
         {
-            Serializer SR = new Serializer();
             string SRString = String.Empty;
 
             Serialize:
@@ -17,13 +16,12 @@ namespace SRTester
             Console.Write("Enter preperty value: ");
             string Value = Console.ReadLine();
 
-            SRString = SR.Set(Identifier, Value, SRString);
+            SRString = SRString.Set(Identifier, Value);
             Console.WriteLine();
             Console.WriteLine($"Serialized properties:{Environment.NewLine}{SRString}");
             Console.WriteLine();
             Console.WriteLine();
             goto Serialize;
-
         }
     }
 }

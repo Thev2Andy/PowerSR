@@ -11,33 +11,33 @@ namespace PowerSR
     /// The class used for serialization.
     /// </summary>
     #endregion
-    [Serializable] public class Serializer
+    [Serializable] public static class Serializer
     {
-        #region AssignOperator String XML
-        /// <summary>
-        /// Used to parse the value of properties.
-        /// </summary>
-        #endregion
-        public string AssignOperator { get; private set; }
-
         #region NewlineOperator String XML
         /// <summary>
         /// Marks a newline in the value of a property.
         /// </summary>
         #endregion
-        public string NewlineOperator { get; private set; }
+        public const string NewlineOperator = "${Newline}";
+
+        #region AssignOperator String XML
+        /// <summary>
+        /// Used to parse the value of properties.
+        /// </summary>
+        #endregion
+        public const string AssignOperator = " = ";
 
 
         #region Set Method XML
         /// <summary>
         /// Serializes a property.
         /// </summary>
+        /// <param name="SerializedString">The pre-existing serialized string to modify / add the serialized property to.</param>
         /// <param name="Identifier">The name of the property.</param>
         /// <param name="Value">The value of the property.</param>
-        /// <param name="SerializedString">The pre-existing serialized string to modify / add the serialized property to.</param>
         /// <returns>All the serialized properties (the pre-existing ones + the one that was just serialized) as a string.</returns>
         #endregion
-        public string Set(string Identifier, Object Value, string SerializedString = "")
+        public static string Set(this string SerializedString, string Identifier, Object Value)
         {
             List<string> ExistingProperties = SerializedString.Split(Environment.NewLine, StringSplitOptions.None).ToList();
             for (int i = 0; i < ExistingProperties.Count; i++)
@@ -57,11 +57,11 @@ namespace PowerSR
         /// <summary>
         /// Gets the value of a serialized property.
         /// </summary>
-        /// <param name="Identifier">The name of the property.</param>
         /// <param name="SerializedString">The serialized string that contains the property.</param>
+        /// <param name="Identifier">The name of the property.</param>
         /// <returns>The value of the property.</returns>
         #endregion
-        public Object Get(string Identifier, string SerializedString)
+        public static Object Get(this string SerializedString, string Identifier)
         {
             List<string> Properties = SerializedString.Split(Environment.NewLine, StringSplitOptions.None).ToList();
             for (int i = 0; i < Properties.Count; i++)
@@ -83,7 +83,7 @@ namespace PowerSR
         /// <param name="SerializedString">The serialized string to remove the property from.</param>
         /// <returns>The serialized string.</returns>
         #endregion
-        public string Delete(string Identifier, string SerializedString)
+        public static string Delete(this string SerializedString, string Identifier)
         {
             List<string> Properties = SerializedString.Split(Environment.NewLine, StringSplitOptions.None).ToList();
             for (int i = 0; i < Properties.Count; i++)
@@ -95,20 +95,6 @@ namespace PowerSR
             }
 
             return String.Join(Environment.NewLine, Properties);
-        }
-
-
-
-        #region Serializer Constructor XML
-        /// <summary>
-        /// Initializes the <c>Serializer</c> class.
-        /// </summary>
-        /// <param name="AssignOperator">Used to parse the value of properties.</param>
-        /// <param name="NewlineOperator">Marks a newline in a property.</param>
-        #endregion
-        public Serializer(string AssignOperator = " = ", string NewlineOperator = "${Newline}") {
-            this.AssignOperator = AssignOperator;
-            this.NewlineOperator = NewlineOperator;
         }
     }
 }
