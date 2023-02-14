@@ -39,6 +39,10 @@ namespace PowerSR
         #endregion
         public static string Set(this string SerializedString, string Identifier, Object Value)
         {
+            SerializedString = ((SerializedString != null) ? SerializedString : String.Empty);
+            Identifier = ((Identifier != null) ? Identifier : String.Empty);
+            Value = ((Value != null) ? Value : String.Empty);
+
             List<string> ExistingProperties = SerializedString.Split(Environment.NewLine, StringSplitOptions.None).ToList();
             for (int i = 0; i < ExistingProperties.Count; i++)
             {
@@ -63,6 +67,9 @@ namespace PowerSR
         #endregion
         public static Object Get(this string SerializedString, string Identifier)
         {
+            SerializedString = ((SerializedString != null) ? SerializedString : String.Empty);
+            Identifier = ((Identifier != null) ? Identifier : String.Empty);
+
             List<string> Properties = SerializedString.Split(Environment.NewLine, StringSplitOptions.None).ToList();
             for (int i = 0; i < Properties.Count; i++)
             {
@@ -85,6 +92,9 @@ namespace PowerSR
         #endregion
         public static string Delete(this string SerializedString, string Identifier)
         {
+            SerializedString = ((SerializedString != null) ? SerializedString : String.Empty);
+            Identifier = ((Identifier != null) ? Identifier : String.Empty);
+
             List<string> Properties = SerializedString.Split(Environment.NewLine, StringSplitOptions.None).ToList();
             for (int i = 0; i < Properties.Count; i++)
             {

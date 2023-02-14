@@ -9,7 +9,7 @@ namespace SRTester
         {
             string SRString = String.Empty;
 
-            Serialize:
+        Serialize:
             Console.Write("Enter preperty identifier: ");
             string Identifier = Console.ReadLine();
 
