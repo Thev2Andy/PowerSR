@@ -13,7 +13,6 @@ namespace PowerSR
     /// The class used for serialization.
     /// </summary>
     #endregion
-    [Serializable]
     public static class Serializer
     {
         #region NewlineOperatorRegex String XML
