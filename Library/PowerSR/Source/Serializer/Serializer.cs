@@ -112,7 +112,7 @@ namespace PowerSR
             return null;
         }
 
-        #region Get Method XML
+        #region Length Method XML
         /// <summary>
         /// Gets the property count of the serialized string.
         /// </summary>
