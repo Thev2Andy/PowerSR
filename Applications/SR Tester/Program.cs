@@ -25,6 +25,7 @@ namespace SRTester
                 Console.WriteLine($"Serialized properties:{Environment.NewLine}{SRString}");
                 Console.WriteLine();
                 Console.WriteLine();
+                Console.WriteLine($"Serialized property count: {SRString.Length()}");
             }
         }
     }

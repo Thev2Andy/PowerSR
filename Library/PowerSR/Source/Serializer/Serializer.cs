@@ -112,6 +112,17 @@ namespace PowerSR
             return null;
         }
 
+        #region Get Method XML
+        /// <summary>
+        /// Gets the property count of the serialized string.
+        /// </summary>
+        /// <param name="SerializedString">The serialized string whose properties to count.</param>
+        /// <returns>The property count of the serialized string.</returns>
+        #endregion
+        public static int Length(this string SerializedString) {
+            return SerializedString.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+
 
         #region Delete Method XML
         /// <summary>
