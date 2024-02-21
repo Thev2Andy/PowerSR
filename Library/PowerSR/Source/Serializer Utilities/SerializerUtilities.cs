@@ -13,6 +13,13 @@ namespace PowerSR
     #endregion
     public static class SerializerUtilities
     {
+        #region NewlineOperator String XML
+        /// <summary>
+        /// The raw newline operator, used by <see cref="SerializerUtilities.ComposeNewlineOperator">the compose function</see>. To get an actual newline operator string, compose one with the aforementioned function.
+        /// </summary>
+        #endregion
+        public const string NewlineOperator = "${Newline~Index~}";
+
         #region ComposeNewlineOperator Method XML
         /// <summary>
         /// Composes a newline operator with the specified index.
@@ -21,7 +28,7 @@ namespace PowerSR
         /// <returns>The newline operator literal.</returns>
         #endregion
         public static string ComposeNewlineOperator(int Index = 0) {
-            return Serializer.NewlineOperator.Replace("~Index~", ((Index > 0) ? Index.ToString() : String.Empty));
+            return NewlineOperator.Replace("~Index~", ((Index > 0) ? Index.ToString() : String.Empty));
         }
     }
 }

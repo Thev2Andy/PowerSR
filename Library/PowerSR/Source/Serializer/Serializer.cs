@@ -15,31 +15,9 @@ namespace PowerSR
     #endregion
     public static class Serializer
     {
-        #region NewlineOperatorRegex String XML
-        /// <summary>
-        /// The regex pattern used to detect the <see cref="NewlineOperator">newline operator</see>, goes hand in hand with it in the serializer implementation.
-        /// </summary>
-        #endregion
-        public const string NewlineOperatorRegex = @"\${Newline(\d+)?}";
-
-        #region NewlineOperator String XML
-        /// <summary>
-        /// The raw newline operator, used by <see cref="SerializerUtilities.ComposeNewlineOperator">the compose function</see>. To get an actual newline operator string, compose one with the aforementioned function.
-        /// </summary>
-        #endregion
-        public const string NewlineOperator = "${Newline~Index~}";
-
-        #region AssignOperator String XML
-        /// <summary>
-        /// Used to parse the value of properties.
-        /// </summary>
-        #endregion
-        public const string AssignOperator = " = ";
-
-
         // Private / Inaccessible variables..
-        private static readonly Regex NewlineRegex = new Regex(NewlineOperatorRegex, RegexOptions.Compiled);
-
+        private static readonly Regex NewlineRegex = new Regex(@"\${Newline(\d+)?}", RegexOptions.Compiled);
+        private const string AssignOperator = " = ";
 
 
         #region Set Method XML
@@ -57,6 +35,7 @@ namespace PowerSR
             Identifier = ((Identifier != null) ? Identifier : String.Empty);
             Value = ((Value != null) ? Value : String.Empty);
 
+            string NewlineOperator = SerializerUtilities.ComposeNewlineOperator();
 
             Value = NewlineRegex.Replace(Value.ToString(), new MatchEvaluator((Match) => {
                 int CurrentNumber = ((Match.Groups[1].Success) ? int.Parse(Match.Groups[1].Value) : 0);
@@ -68,15 +47,15 @@ namespace PowerSR
             List<string> ExistingProperties = SerializedString.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
             for (int I = 0; I < ExistingProperties.Count; I++)
             {
-                if (ExistingProperties[I].StartsWith($"{Identifier.Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())}{AssignOperator}"))
+                if (ExistingProperties[I].StartsWith($"{Identifier.Replace(Environment.NewLine, NewlineOperator)}{AssignOperator}"))
                 {
-                    ExistingProperties[I] = $"{Identifier.Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())}{AssignOperator}{Value.ToString().Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())}";
+                    ExistingProperties[I] = $"{Identifier.Replace(Environment.NewLine, NewlineOperator)}{AssignOperator}{Value.ToString().Replace(Environment.NewLine, NewlineOperator)}";
                     return String.Join(Environment.NewLine, ExistingProperties);
                 }
             }
 
             if (ExistingProperties.Count > 0 && (String.IsNullOrEmpty(ExistingProperties[0]) || String.IsNullOrWhiteSpace(ExistingProperties[0]))) ExistingProperties.RemoveAt(0);
-            ExistingProperties.Add($"{Identifier.Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())}{AssignOperator}{Value.ToString().Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())}");
+            ExistingProperties.Add($"{Identifier.Replace(Environment.NewLine, NewlineOperator)}{AssignOperator}{Value.ToString().Replace(Environment.NewLine, NewlineOperator)}");
             return String.Join(Environment.NewLine, ExistingProperties);
         }
 
@@ -93,12 +72,14 @@ namespace PowerSR
             SerializedString = ((SerializedString != null) ? SerializedString : String.Empty);
             Identifier = ((Identifier != null) ? Identifier : String.Empty);
 
+            string NewlineOperator = SerializerUtilities.ComposeNewlineOperator();
+
             List<string> Properties = SerializedString.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
             for (int I = 0; I < Properties.Count; I++)
             {
-                if (Properties[I].StartsWith(Identifier.Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())))
+                if (Properties[I].StartsWith(Identifier.Replace(Environment.NewLine, NewlineOperator)))
                 {
-                    string Return = Properties[I].Remove(0, ($"{Identifier.Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())}{AssignOperator}").Length).Replace(SerializerUtilities.ComposeNewlineOperator(), Environment.NewLine);
+                    string Return = Properties[I].Remove(0, ($"{Identifier.Replace(Environment.NewLine, NewlineOperator)}{AssignOperator}").Length).Replace(NewlineOperator, Environment.NewLine);
                     Return = NewlineRegex.Replace(Return.ToString(), new MatchEvaluator((Match) => {
                         int CurrentNumber = ((Match.Groups[1].Success) ? int.Parse(Match.Groups[1].Value) : 0);
                         int NewNumber = CurrentNumber - 1;
@@ -137,10 +118,12 @@ namespace PowerSR
             SerializedString = ((SerializedString != null) ? SerializedString : String.Empty);
             Identifier = ((Identifier != null) ? Identifier : String.Empty);
 
+            string NewlineOperator = SerializerUtilities.ComposeNewlineOperator();
+
             List<string> Properties = SerializedString.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).ToList();
             for (int I = 0; I < Properties.Count; I++)
             {
-                if (Properties[I].StartsWith(Identifier.Replace(Environment.NewLine, SerializerUtilities.ComposeNewlineOperator())))
+                if (Properties[I].StartsWith(Identifier.Replace(Environment.NewLine, NewlineOperator)))
                 {
                     Properties.RemoveAt(I);
                     break;
