@@ -2,15 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-	  <RootNamespace>PowerSR</RootNamespace>
+	<RootNamespace>PowerSR</RootNamespace>
+	<Authors>Thev2Andy</Authors>
 
-  <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    
-  <Nullable>disable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\PowerSR\PowerSR\XML Docs\PowerSR XML.xml</DocumentationFile>
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 	
   <ItemGroup>
